@@ -10,6 +10,8 @@ function showresult() {
     var immagine_schedaprodotto = jQuery('#panel-scheda-tecnica .col-sm-4 img').attr('src');
     var tproduct = jQuery('h1.prod-name').text();
     var description = jQuery('.desc').text();
+    var controllore = 0
+    var valorevuoto = " ";
     description = description.replace(/(\n|\t)/gm, '');
     jQuery('#slider-intro li a').each(function() {
         immagine_prodotto += "https://www.pedrali.it" + jQuery(this).attr('href') + "; ";
@@ -17,9 +19,14 @@ function showresult() {
     var prodotti = [];
     if (jQuery('.finiture .item').length > 0) {
         jQuery('.finiture .item').each(function(i) {
+            controllore ++;
             var title_color = jQuery(this).find('h3').text();
             var url_color = jQuery(this).find('img').attr('src');
-            html = immagine_prodotto + '|' + tproduct + '|<img src="https://www.pedrali.it' + immagine_schedaprodotto + '"><br>' + description + '|' + title_color + '|' + url_color;
+            if (controllore == 1) {
+                html = immagine_prodotto + '|' + tproduct + '|'+description+'<br><img src="https://www.pedrali.it' + immagine_schedaprodotto + '"> |' + title_color + '|' + url_color;
+            }else {
+                html = valorevuoto + '|' + tproduct + '|'+valorevuoto+'|' + title_color + '|' + url_color;
+            }
             prodotti.push(html);
         });
     } else {
